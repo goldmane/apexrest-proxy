@@ -1,0 +1,14 @@
+services:
+  web: # Define a service named 'web'
+    build:
+      context: . # Build the image using the Dockerfile in the current directory
+    ports:
+      - "3000:3000" # Map port 3000 on the host to port 3000 in the container
+    volumes:
+      - .:/usr/src/app # Mount your local project directory into the container for live code syncing
+      - /usr/src/app/node_modules # Important: Exclude the container's node_modules from being overwritten by the host's volume mount
+    environment:
+      - NODE_ENV=development # Set environment variables
+      - PORT=3000
+      - PROXY_CONFIGS={"local":{"proxy_target":"https://webhook.site/82e6a3b7-9664-4960-b65e-f5d25b826b3e"},"csdev4":{"proxy_target":"https://orgcs--csdev4sb1.sandbox.my.salesforce-sites.com/gmeetPOC/services/apexrest/meetEvents","instance_url":"https://orgcs--csdev4sb1.sandbox.my.salesforce.com","login_url":"https://test.salesforce.com","oauth":{"client_id":"","client_secret":""}}}
+    command: npm run dev # Override the CMD in the Dockerfile for development purposes (e.g., using nodemon)
