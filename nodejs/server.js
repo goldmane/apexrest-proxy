@@ -13,7 +13,7 @@ app.all('/:clientId/', (req, res) => {
     if (!config) {
         res.sendStatus(400).end();
     } else {
-        const domain = proxies['local'].domain
+        const domain = proxies['local'].target_domain
         console.log(`Proxy to ${domain}`)
         proxy.web(req, res, {
             target: domain,

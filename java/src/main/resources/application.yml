@@ -1,0 +1,18 @@
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: gateway
+spring:
+  application:
+    name: ApexRestProxy
+  cloud:
+    gateway:
+      routes:
+        - id: route1
+          uri: https://webhook.site/64212f25-6ca0-49b1-8c08-66e15899a36f
+          predicates:
+            - Path=/proxy1
